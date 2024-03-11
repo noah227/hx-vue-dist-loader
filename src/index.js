@@ -4,7 +4,7 @@ const path = require("path")
 /**
  * 加载vue打包文件内容
  * @param dirname {String} __dirname
- * @param dist {String} 打包文件入口，如xx/dist/index.html
+ * @param dist {String} 打包文件入口，如xx/dist/index.html，相对__dirname的路径
  * @param encoding {BufferEncoding}
  * @return {*}
  */
@@ -21,11 +21,15 @@ const loadDist = (dirname, dist, encoding = "utf8") => {
  * @return {String}
  */
 const replaceDistStatics = (s, dirname, dist) => {
-    const matches = s.matchAll(/\/(js|css)\/[\w-]+\.(\w+\.)?(js|css)/g)
+    // const matches = s.matchAll(/\/(js|css|(\w+(\w|\d)*))\/[\w-]+\.(\w+\.)?(js|css)/g)
+    const matches = s.matchAll(/(\/[\w\d]+)+([\w\d]+\.)+(js|css|ico)/g)
+    const distRoot = path.dirname(path.join(dirname, dist))
     for (let m of matches) {
-        const [file, _, __, ___] = m;
-        const f = path.join(path.dirname(path.join(dirname, dist)), file);
-        s = s.replace(file, f);
+        if(m) {
+            const file = m[0]
+            const f = path.join(distRoot, file);
+            s = s.replace(file, f);
+        }
     }
     return s;
 }
