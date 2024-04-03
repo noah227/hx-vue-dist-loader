@@ -14,15 +14,14 @@ const loadDist = (dirname, dist, encoding = "utf8") => {
 }
 
 /**
- * 替换静态文件路径
+ * 替换dist/index.html中静态文件路径
  * @param s {String}
  * @param dirname {String}
  * @param dist {String}
  * @return {String}
  */
 const replaceDistStatics = (s, dirname, dist) => {
-    // const matches = s.matchAll(/\/(js|css|(\w+(\w|\d)*))\/[\w-]+\.(\w+\.)?(js|css)/g)
-    const matches = s.matchAll(/(\/\w+)+(\w+\.)+(js|css|ico)/g)
+    const matches = s.matchAll(/(\/\w+)+(\w+\.)+(\w+)/g)
     const distRoot = path.dirname(path.join(dirname, dist))
     for (let m of matches) {
         if(m) {
