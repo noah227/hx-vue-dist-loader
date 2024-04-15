@@ -21,7 +21,7 @@ const loadDist = (dirname, dist, encoding = "utf8") => {
  * @return {String}
  */
 const replaceDistStatics = (s, dirname, dist) => {
-    const matches = s.matchAll(/(\/\w+)+(\w+\.)+(\w+)/g)
+    const matches = s.matchAll(/(\/?\w+\/)?(\w+(-\w+)?\.)+(\w+)/g)
     const distRoot = path.dirname(path.join(dirname, dist))
     for (let m of matches) {
         if(m) {

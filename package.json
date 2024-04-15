@@ -1,6 +1,6 @@
 {
     "name": "hx-vue-dist-loader",
-    "version": "1.2.2",
+    "version": "1.2.5",
     "description": "",
     "main": "src/index.js",
     "scripts": {
